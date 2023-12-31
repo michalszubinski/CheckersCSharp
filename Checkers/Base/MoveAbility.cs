@@ -20,6 +20,7 @@ namespace Checkers.Base
         
         internal bool obligatoryIfPossible;
         internal bool obligatoryWhenCondition;
+        internal bool obligatoryPreventingPlayerChange;
 
         // bool canLeaveBoard;
     }

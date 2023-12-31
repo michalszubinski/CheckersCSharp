@@ -13,24 +13,79 @@ namespace Checkers.GameAndRules
         internal Board board;
         internal GameRules gameRules;
 
+        //GAME
+        List<Move> moves = new List<Move>(); // current moves available to active player
+        bool isTheMovePossible = false; // is the move possible
+        Move requestedMove = new Move();
+
         void startGame() // TODO
         {
-            var gameRules = getGameRules("default");
-            applyGameRules(gameRules);
-            List<Move> moves = new List<Move>();
-
+            setGameRules("default");
 
             while (true) // Game loop
             {
-                moves.Clear();
-                moves = getAllMoves(board,currentTurn_team);
+                beforeMakeMove(); // clean-up, generates moves available to player
                 do // Turn loop
                 {
+                    isTheMovePossible = makeMove();
 
-
-                } while (true);
+                } while (!isTheMovePossible);
+                afterMakeMove(); // applies the move, switches the team the terms are right
             }
         }
+
+        void setGameRules(string ruleSetName)
+        {
+            var gameRules = getGameRules( ruleSetName.ToLower() );
+            applyGameRules(gameRules);
+        }
+
+        private void afterMakeMove()
+        {
+            applyMove();
+            decidePlayersTurn();
+        }
+
+        bool makeMove()
+        {
+            switch (gameRules.players[currentTurn_team].inputType)
+            {
+                case "default":
+                    return true;
+            }
+            return true;
+        }
+
+        void decidePlayersTurn()
+        {
+            if (!checkForObligatoryPreventingPlayerChange())
+            {
+                switchTeam();
+            }
+        }
+
+        bool checkForObligatoryPreventingPlayerChange() // TODO
+        {
+            return false;
+        }
+
+        void beforeMakeMove()
+        {
+            afterTurnClearUp();
+            moves = getAllMoves(board, currentTurn_team);
+        }
+
+        void applyMove()
+        {
+            throw new NotImplementedException();
+        }
+
+        void afterTurnClearUp()
+        {
+            moves.Clear();
+            isTheMovePossible = false;
+        }
+
         List<Move> getAllMoves(Board board, int teamId) 
         {
             List<Move> moves = new List<Move>();
@@ -39,7 +94,7 @@ namespace Checkers.GameAndRules
             {
                 if (pawn.teamId == teamId)
                 {
-                    moves += getMoveForSinglePawn(board, pawn);
+                    moves.AddRange( getMoveForSinglePawn(board, pawn) );
                 }
             }
 
