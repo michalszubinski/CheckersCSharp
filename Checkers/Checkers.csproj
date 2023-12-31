@@ -45,10 +45,12 @@
   <ItemGroup>
     <Compile Include="Base\Board.cs" />
     <Compile Include="Base\Coordinates.cs" />
+    <Compile Include="Base\Move.cs" />
     <Compile Include="Base\MoveAbility.cs" />
     <Compile Include="Base\Pawn.cs" />
     <Compile Include="Data\Const.cs" />
     <Compile Include="GameAndRules\Game.cs" />
+    <Compile Include="GameAndRules\GameRules.cs" />
     <Compile Include="GameAndRules\GameSettings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

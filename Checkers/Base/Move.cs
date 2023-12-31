@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Checkers.Base
 {
-    internal struct Coordinates
+    internal class Move
     {
-        internal int x;
-        internal int y;
+        Coordinates startingPosition;
+        Coordinates endingPosition;
+        MoveAbility moveAbility;
+        bool allowed;
     }
 }

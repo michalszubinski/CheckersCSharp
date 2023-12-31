@@ -8,13 +8,20 @@ namespace Checkers.Base
 {
     internal class Pawn
     {
-        Coordinates position;
-        List<MoveAbility> allowedMoves;
-
-        int teamId;
-
-        bool isDestroyable;
-        bool isAttacked;
-        bool isDefended;
+        internal Coordinates position;
+        internal List<MoveAbility> moveAbilities;
+        internal string className;
+         
+        internal int teamId;
+        internal int timesMoved;
+        internal int killCount;
+        
+        internal bool isDestroyable;
+        internal bool isAttacked;
+        internal bool isDefended;
+        
+        internal bool shouldNotBeAttacked;
+        internal bool specialAbilityOnReachingOtherEnd;
+        internal bool specialAbilityReached;
     }
 }

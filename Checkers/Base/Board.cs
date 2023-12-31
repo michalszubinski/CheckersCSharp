@@ -8,10 +8,10 @@ namespace Checkers.Base
 {
     internal class Board
     {
-        List<Pawn> pawns;
-        int x_LowerBoundary = 0;
-        int y_LowerBoundary = 0;
-        int x_UpperBoundary = 8;    
-        int y_UpperBoundary = 8;
+        internal List<Pawn> pawns;
+        internal int x_LowerBoundary = 0;
+        internal int y_LowerBoundary = 0;
+        internal int x_UpperBoundary = 8;    
+        internal int y_UpperBoundary = 8;
     }
 }
