@@ -10,5 +10,16 @@ namespace Checkers.Base
     {
         internal int x;
         internal int y;
+
+        public Coordinates(int argx, int argy)
+        {
+            x =argx; y = argy;    
+        }
+
+        
+        public static Coordinates operator +(Coordinates left, Coordinates right)
+        {
+            return new Coordinates(left.x + right.x, left.y + right.y);
+        }
     }
 }

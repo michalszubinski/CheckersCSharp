@@ -8,9 +8,12 @@ namespace Checkers.Base
 {
     internal class Move
     {
-        Coordinates startingPosition;
-        Coordinates endingPosition;
-        MoveAbility moveAbility;
-        bool allowed;
+        internal Coordinates startingPosition;
+        internal Coordinates endingPosition;
+        internal MoveAbility moveAbility;
+        internal bool allowed;
+
+        internal int pawnId;
+        internal List<int> enemyIds;
     }
 }

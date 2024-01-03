@@ -88,34 +88,9 @@ namespace Checkers.GameAndRules
 
         List<Move> getAllMoves(Board board, int teamId) 
         {
-            List<Move> moves = new List<Move>();
-            List<Move> temp = new List<Move>();
-            foreach (var pawn in board.pawns)
-            {
-                if (pawn.teamId == teamId)
-                {
-                    moves.AddRange( getMoveForSinglePawn(board, pawn) );
-                }
-            }
-
-            return moves;
+            return board.generateAllMoves(teamId);
         }
-        List<Move> getMoveForSinglePawn(Board board, Pawn pawn) // rethink
-        {
-            List<Move> moves = new List<Move>;
-
-            foreach(var moveAbility in pawn.moveAbilities)
-            {
-                Move temp = new Move();
-
-                // CHECK IN MOVE IF THE MOVEABILITY IS POSSIBLE
-            }
-
-            return moves;
-        }
-        void removePawn() { }
         void applyGameRules(GameRules gameRules) {}
-        bool checkIfMoveAbilityIsPossible(MoveAbility argMoveAbility) { return true; }
         GameRules getGameRules(string ruleSet) // TODO
         {
             GameRules temp = new GameRules();  

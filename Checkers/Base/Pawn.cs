@@ -8,6 +8,7 @@ namespace Checkers.Base
 {
     internal class Pawn
     {
+        internal int pawnId;
         internal Coordinates position;
         internal List<MoveAbility> moveAbilities;
         internal string className;
