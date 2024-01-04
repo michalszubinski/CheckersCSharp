@@ -21,8 +21,9 @@ namespace Checkers.Base
         internal bool isAttacked;
         internal bool isDefended;
         
-        internal bool shouldNotBeAttacked;
+        internal bool shouldBeProtectedFromAttacks;
         internal bool specialAbilityOnReachingOtherEnd;
         internal bool specialAbilityReached;
+        internal bool specialAbilityOnStart;
     }
 }

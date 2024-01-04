@@ -26,7 +26,20 @@ namespace Checkers.Base
                 }
             }
 
+            moves = checkForObligatoryMoves(moves);
+
             return moves;
+        }
+
+        private List<Move> checkForObligatoryMoves(List<Move> moves)
+        {
+            var newMoves = new List<Move>();
+            bool flag_foundObligatory = false;
+
+            // TODO
+
+            if (!flag_foundObligatory) return moves;
+            else return newMoves;
         }
 
         private List<Move> generateMovesForSinglePawn(Pawn pawn)
@@ -35,6 +48,7 @@ namespace Checkers.Base
             foreach(var moveAbility in pawn.moveAbilities)
             {
                 var move = generateMove(moveAbility, pawn);
+                move.moveAbility = moveAbility; 
                 if(checkIfMoveIsValid(move)) moves.Add( move);
             }
             return moves;
@@ -44,20 +58,71 @@ namespace Checkers.Base
         {
             if (!checkIfCoordinatesAreInsideTheBoard(move.endingPosition)) return false;
 
+            if (!move.moveAbility.canReplaceExisting)
+            {
+                foreach(var id in move.enemyIds)
+                {
+                    if (move.endingPosition == pawns[id].position) return false;
+                }
+                foreach (var id in move.friendlyIds)
+                {
+                    if (move.endingPosition == pawns[id].position) return false;
+                }
+            }
 
+            if(!move.moveAbility.canScanEnemies || !move.moveAbility.canScanTeammates)
+            {
+                if(move.enemyIds.Count > 1 || move.friendlyIds.Count > 1) return false;
+                else if(move.enemyIds.Count == 1 || move.friendlyIds.Count == 1)
+                {
+                    if(!move.moveAbility.canSingleScanTeammate && move.friendlyIds.Count == 1) return false;    
+                    if(!move.moveAbility.canSingleScanEnemy && move.enemyIds.Count == 1) return false;    
+                }
+            }
+
+            if(move.moveAbility.haveToScanEnemies || move.moveAbility.haveToScanTeammates)
+            {
+                if (move.enemyIds.Count == 0 && move.moveAbility.haveToScanEnemies) return false;
+                if (move.friendlyIds.Count == 0 && move.moveAbility.haveToScanTeammates) return false;
+            }
+
+            if(move.moveAbility.haveToSingleScanEnemy || move.moveAbility.haveToSingleScanTeammate)
+            {
+                if (move.moveAbility.haveToSingleScanEnemy && !(move.enemyIds.Count == 1)) return false;
+                if (move.moveAbility.haveToSingleScanTeammate && !(move.friendlyIds.Count == 1)) return false;
+            }
+
+            if(move.moveAbility.canAttack || move.moveAbility.haveToAttack)
+            {
+                if (move.moveAbility.haveToAttack && move.enemyIds.Count == 0) return false;
+                
+                foreach(var enemyId in move.enemyIds)
+                {
+                    if (!pawns[enemyId].isDestroyable) return false;
+                }
+            }
             // MOVEABILITY:
             /*
-            internal bool canReplaceExisting;
-        
-            internal bool canScanEnemy;
-            internal bool canScanTeammate;
-        
-            internal bool haveToScanEnemy;
-            internal bool haveToScanTeammate;
-        
+
+            internal bool canAttack;                        DONE
+            internal bool haveToAttack;                     DONE
+
+            internal bool canReplaceExisting;               DONE
+
+            internal bool canScanEnemies;                   DONE
+            internal bool canScanTeammates;                 DONE
+            internal bool canSingleScanEnemy;               DONE
+            internal bool canSingleScanTeammate;            DONE
+
+            internal bool haveToScanEnemies;                DONE
+            internal bool haveToScanTeammates;              DONE
+            internal bool haveToSingleScanEnemy;            DONE
+            internal bool haveToSingleScanTeammate;         DONE
+
             internal bool obligatoryIfPossible;
             internal bool obligatoryWhenCondition;
             internal bool obligatoryPreventingPlayerChange;
+
              */
 
             // PAWN
@@ -65,10 +130,11 @@ namespace Checkers.Base
             internal bool isDestroyable;
             internal bool isAttacked;
             internal bool isDefended;
-        
-            internal bool shouldNotBeAttacked;
+
+            internal bool shouldBeProtectedFromAttacks;
             internal bool specialAbilityOnReachingOtherEnd;
             internal bool specialAbilityReached;
+            internal bool specialAbilityOnStart;
              */
 
             return true;
@@ -89,7 +155,7 @@ namespace Checkers.Base
             Move move = new Move();
 
             move.startingPosition = pawn.position;
-            move.endingPosition = pawn.position + moveAbility.positionChange;
+            move.endingPosition = pawn.position + moveAbility.positionDifference;
 
             move.enemyIds = scanForEnemyPawns();
 

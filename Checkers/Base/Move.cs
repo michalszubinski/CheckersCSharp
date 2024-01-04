@@ -15,5 +15,6 @@ namespace Checkers.Base
 
         internal int pawnId;
         internal List<int> enemyIds;
+        internal List<int> friendlyIds;
     }
 }

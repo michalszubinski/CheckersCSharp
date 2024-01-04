@@ -8,16 +8,24 @@ namespace Checkers.Base
 {
     internal struct MoveAbility
     {
-        internal Coordinates positionChange;
+        internal Coordinates positionDifference;
+        internal Coordinates attackedPositionDifference;
+
+        internal bool canAttack;
+        internal bool haveToAttack;
         
         internal bool canReplaceExisting;
         
-        internal bool canScanEnemy;
-        internal bool canScanTeammate;
-        
-        internal bool haveToScanEnemy;
-        internal bool haveToScanTeammate;
-        
+        internal bool canScanEnemies;
+        internal bool canScanTeammates;
+        internal bool canSingleScanEnemy;
+        internal bool canSingleScanTeammate;
+
+        internal bool haveToScanEnemies;
+        internal bool haveToScanTeammates;
+        internal bool haveToSingleScanEnemy;
+        internal bool haveToSingleScanTeammate;
+
         internal bool obligatoryIfPossible;
         internal bool obligatoryWhenCondition;
         internal bool obligatoryPreventingPlayerChange;
