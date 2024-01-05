@@ -38,7 +38,11 @@ namespace Checkers.Base
 
             foreach(var move in moves)
             {
-                if()
+                if (move.obligatory)
+                {
+                    if (!flag_foundObligatory) flag_foundObligatory = true;
+                    newMoves.Add(move);
+                }
             }
 
             if (!flag_foundObligatory) return moves;
@@ -54,8 +58,6 @@ namespace Checkers.Base
                 move.moveAbility = moveAbility; 
                 if(checkIfMoveIsValid(move)) moves.Add( move);
             }
-
-            moves = checkForObligatoryMoves(moves);
 
             return moves;
         }
@@ -209,7 +211,7 @@ namespace Checkers.Base
         {
             foreach(var pawn in pawns)
             {
-
+                if (pawn.position == coordinates) return pawn;
             }
 
             //throw new Exception("Checkers.Base.Board.getPawnAtCoordinates(Coordinates coordinates) -> PAWN NOT FOUND. Use try-catch on the method.");
