@@ -66,7 +66,7 @@ namespace Checkers.GameAndRules
 
         bool checkForObligatoryPreventingPlayerChange() // TODO
         {
-            return false;
+            return board.checkIfObligatoryPreventingPlayerChangeExists(moves);
         }
 
         void beforeMakeMove()

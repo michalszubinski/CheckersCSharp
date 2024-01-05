@@ -36,7 +36,10 @@ namespace Checkers.Base
             var newMoves = new List<Move>();
             bool flag_foundObligatory = false;
 
-            // TODO
+            foreach(var move in moves)
+            {
+                if()
+            }
 
             if (!flag_foundObligatory) return moves;
             else return newMoves;
@@ -51,6 +54,9 @@ namespace Checkers.Base
                 move.moveAbility = moveAbility; 
                 if(checkIfMoveIsValid(move)) moves.Add( move);
             }
+
+            moves = checkForObligatoryMoves(moves);
+
             return moves;
         }
 
@@ -101,6 +107,11 @@ namespace Checkers.Base
                     if (!pawns[enemyId].isDestroyable) return false;
                 }
             }
+
+            if (move.moveAbility.obligatoryPreventingPlayerChange)
+            {
+                move.obligatory = true;
+            }
             // MOVEABILITY:
             /*
 
@@ -121,7 +132,7 @@ namespace Checkers.Base
 
             internal bool obligatoryIfPossible;
             internal bool obligatoryWhenCondition;
-            internal bool obligatoryPreventingPlayerChange;
+            internal bool obligatoryPreventingPlayerChange; DONE
 
              */
 
@@ -142,12 +153,18 @@ namespace Checkers.Base
 
         private bool checkIfCoordinatesAreInsideTheBoard(Coordinates position)
         {
+            /*
             if(position.x < x_LowerBoundary) return false;   
             if(position.y < y_LowerBoundary) return false;   
             if(position.x > x_UpperBoundary) return false;   
             if(position.y > x_UpperBoundary) return false;   
 
             return true;
+            */
+            return position.x >= x_LowerBoundary &&
+                   position.y >= y_LowerBoundary &&
+                   position.x <= x_UpperBoundary &&
+                   position.y <= x_UpperBoundary ? true : false;
         }
 
         private Move generateMove(MoveAbility moveAbility, Pawn pawn)
@@ -156,19 +173,57 @@ namespace Checkers.Base
 
             move.startingPosition = pawn.position;
             move.endingPosition = pawn.position + moveAbility.positionDifference;
+            move.moveAbility = moveAbility;
 
-            move.enemyIds = scanForEnemyPawns();
+            move = scanForPawns(move,pawn);
 
             return move;
         }
 
-        private List<int> scanForEnemyPawns() // TODO
+        private Move scanForPawns(Move move, Pawn pawn) // TODO
+        { 
+            if(Math.Abs(move.moveAbility.positionDifference.x) == Math.Abs(move.moveAbility.positionDifference.y))
+            {
+                for(int i = 0; i < Math.Abs(move.moveAbility.positionDifference.x); ++i)
+                {
+                    // CLEAN THIS LATER
+                    Pawn tempPawn = getPawnAtCoordinates(new Coordinates(
+                        move.startingPosition.x + i * ((move.moveAbility.positionDifference.x)/ Math.Abs(move.moveAbility.positionDifference.x)),
+                        move.startingPosition.y + i * ((move.moveAbility.positionDifference.y) / Math.Abs(move.moveAbility.positionDifference.y))));
+
+                    if (tempPawn == null) continue;
+
+                    if (pawn.teamId == tempPawn.teamId) move.friendlyIds.Add(tempPawn.teamId);
+                    else if (pawn.teamId != tempPawn.teamId) move.enemyIds.Add(tempPawn.teamId);
+                }
+            }
+            else
+            { // TODO
+                throw new NotImplementedException(); 
+            }
+
+            return move;
+        }
+
+        private Pawn getPawnAtCoordinates(Coordinates coordinates) // CAN THROW
         {
-            List<int> enemyPawnsIds = new List<int>();  
+            foreach(var pawn in pawns)
+            {
 
-            // TODO
+            }
 
-            return enemyPawnsIds;
+            //throw new Exception("Checkers.Base.Board.getPawnAtCoordinates(Coordinates coordinates) -> PAWN NOT FOUND. Use try-catch on the method.");
+            return null;
+        }
+
+        public bool checkIfObligatoryPreventingPlayerChangeExists(List<Move> moves)
+        {
+            foreach(var move in moves)
+            {
+                if(move.moveAbility.obligatoryPreventingPlayerChange) return true;
+            }
+
+            return false;
         }
     }
 }
