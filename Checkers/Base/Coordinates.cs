@@ -16,6 +16,14 @@ namespace Checkers.Base
             x =argx; y = argy;    
         }
 
+        public static Coordinates textToCoordinates(string text)
+        {
+            Coordinates cords = new Coordinates();
+
+            // TODO
+
+            return cords;
+        }
         
         public static Coordinates operator +(Coordinates left, Coordinates right)
         {

@@ -53,6 +53,7 @@
     <Compile Include="GameAndRules\GameRules.cs" />
     <Compile Include="GameAndRules\GameSettings.cs" />
     <Compile Include="GameAndRules\Player.cs" />
+    <Compile Include="GameAndRules\PlayerConsole.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
