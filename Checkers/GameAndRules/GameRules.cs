@@ -20,5 +20,17 @@ namespace Checkers.GameAndRules
         internal int y_boardUpperBoundary = 8;
 
         public GameRules() { }
+
+        public GameRules(int numberOfTeams, int startingTeam, List<Pawn> pawns, List<Player> players, int x_boardLowerBoundary, int y_boardLowerBoundary, int x_boardUpperBoundary, int y_boardUpperBoundary)
+        {
+            this.numberOfTeams = numberOfTeams;
+            this.startingTeam = startingTeam;
+            this.pawns = pawns;
+            this.players = players;
+            this.x_boardLowerBoundary = x_boardLowerBoundary;
+            this.y_boardLowerBoundary = y_boardLowerBoundary;
+            this.x_boardUpperBoundary = x_boardUpperBoundary;
+            this.y_boardUpperBoundary = y_boardUpperBoundary;
+        }
     }
 }

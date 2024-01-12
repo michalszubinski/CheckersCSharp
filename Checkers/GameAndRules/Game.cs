@@ -12,9 +12,10 @@ namespace Checkers.GameAndRules
         internal int currentTurn_team;
         internal Board board;
         internal GameRules gameRules;
+        internal List<Player> players;
 
         //GAME
-        List<Move> moves = new List<Move>(); // current moves available to active player
+        List<Move> possibleMoves = new List<Move>(); // current moves available to active player
         bool isTheMovePossible = false; // is the move possible
         Move requestedMove = new Move();
 
@@ -48,12 +49,15 @@ namespace Checkers.GameAndRules
 
         bool makeMove()
         {
-            switch (gameRules.players[currentTurn_team].inputType)
+            Move attemptedMove = players[currentTurn_team].getMove();
+
+            foreach( var move in possibleMoves )
             {
-                case "default":
+                if (attemptedMove.startingPosition == move.startingPosition && attemptedMove.endingPosition == move.endingPosition)
                     return true;
             }
-            return true;
+
+            return false;
         }
 
         void decidePlayersTurn()
@@ -66,13 +70,13 @@ namespace Checkers.GameAndRules
 
         bool checkForObligatoryPreventingPlayerChange() // TODO
         {
-            return board.checkIfObligatoryPreventingPlayerChangeExists(moves);
+            return board.checkIfObligatoryPreventingPlayerChangeExists(possibleMoves);
         }
 
         void beforeMakeMove()
         {
             afterTurnClearUp();
-            moves = getAllMoves(board, currentTurn_team);
+            possibleMoves = getAllMoves(board, currentTurn_team);
         }
 
         void applyMove()
@@ -82,7 +86,7 @@ namespace Checkers.GameAndRules
 
         void afterTurnClearUp()
         {
-            moves.Clear();
+            possibleMoves.Clear();
             isTheMovePossible = false;
         }
 
@@ -90,7 +94,9 @@ namespace Checkers.GameAndRules
         {
             return board.generateAllMoves(teamId);
         }
-        void applyGameRules(GameRules gameRules) {}
+        void applyGameRules(GameRules gameRules)  // TODO
+        {
+        }
         GameRules getGameRules(string ruleSet) // TODO
         {
             GameRules temp = new GameRules();  

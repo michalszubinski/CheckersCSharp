@@ -11,7 +11,6 @@ namespace Checkers.GameAndRules
     {
         internal override Move getMove()
         {
-            string temp;
             Move move = new Move(); // delete instantiation later
 
             try
@@ -19,13 +18,14 @@ namespace Checkers.GameAndRules
                 Console.WriteLine($"Player {teamId}: {name}");
 
                 Console.WriteLine("Enter coordinates of the pawn you would like to move");
-                temp = Console.ReadLine(); // build the method in coordinates 
+                move.startingPosition.loadTextToCoordinates(Console.ReadLine());
 
                 Console.WriteLine("Enter coordinates where you want to make a move");
-                Console.ReadLine();
+                move.endingPosition.loadTextToCoordinates(Console.ReadLine());
             }
-            catch (Exception ex)
+            catch (InvalidCastException ex)
             {
+                // TODO: log exception
                 Console.WriteLine($"ERROR: Wrong input for coordinates: Player {teamId}: {name}");
             }
 

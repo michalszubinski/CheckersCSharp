@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -16,11 +17,26 @@ namespace Checkers.Base
         {
             x =argx; y = argy;    
         }
-
-        public static List<Coordinates> textToCoordinates(string text) // CAN THROW 'InvalidCastException'
+        
+        public static List<Coordinates> textToCoordinatesList(string text) // CAN THROW 'InvalidCastException'
         {
             List<Coordinates> cordList = new List<Coordinates>();
 
+            MatchCollection matches = Regex.Matches(text, $"[a-z][1-9]", RegexOptions.Singleline);
+
+            if (matches.Count == 0) throw new InvalidCastException("ERROR: List<Coordinates> Coordinates.textToCoordinatesList(string): No matches for given text");
+
+            foreach (Match match in matches)
+            {
+                Coordinates temp = textToCoordinates_coordinatesFromMatch(match);
+                cordList.Add(temp);
+            }
+
+            return cordList;
+        }
+
+        public void loadTextToCoordinates(string text) // CAN THROW 'InvalidCastException'
+        {
             //TODO: Expand functionality beyond [a-z][1-9]
             //TODO: Add support for multiple character x coordinates, for example: aaaaaaaa4
             //TODO: Add support for multiple character y coordinates, for example: f12
@@ -31,20 +47,22 @@ namespace Checkers.Base
 
             MatchCollection matches = Regex.Matches(text, $"[a-z][1-9]", RegexOptions.Singleline);
 
-            if (matches.Count == 0) throw new InvalidCastException("ERROR: Coordinates.textToCoordinates(string): No matches for given text");
+            if (matches.Count == 0) throw new InvalidCastException("ERROR: void Coordinates.loadTextToCoordinates(string): No matches for given text");
 
-            foreach (Match match in matches)
-            {
-                Coordinates temp = new Coordinates();
-                int.TryParse(match.Value[0], out temp.x); // TODO
-                int.TryParse(match.Value[1], out temp.y); // TODO
-
-                cordList.Add(temp);
-            }
-
-            return cordList;
+            Coordinates temp = textToCoordinates_coordinatesFromMatch(matches[0]);
+            this.x = temp.x;
+            this.y = temp.y;
         }
-        
+
+        private static Coordinates textToCoordinates_coordinatesFromMatch(Match match)
+        {
+            Coordinates temp = new Coordinates();
+
+            int.TryParse(match.Value[0].ToString(), out temp.x);
+            int.TryParse(match.Value[1].ToString(), out temp.y);
+            return temp;
+        }
+
         public static Coordinates operator +(Coordinates left, Coordinates right)
         {
             return new Coordinates(left.x + right.x, left.y + right.y);
