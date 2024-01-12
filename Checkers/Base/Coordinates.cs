@@ -78,6 +78,24 @@ namespace Checkers.Base
             return (left.x == right.x && left.y == right.y);
         }
 
+        public override int GetHashCode()
+        {
+            int hashCode = 1502939027;
+            hashCode = hashCode * -1521134295 + x.GetHashCode();
+            hashCode = hashCode * -1521134295 + y.GetHashCode();
+            return hashCode;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
         public static bool operator==(Coordinates left, Coordinates right)
         {
             return (left.x == right.x && left.y == right.y);

@@ -51,6 +51,7 @@
     <Compile Include="Data\Const.cs" />
     <Compile Include="GameAndRules\Game.cs" />
     <Compile Include="GameAndRules\GameRules.cs" />
+    <Compile Include="GameAndRules\GameRulesBuilder.cs" />
     <Compile Include="GameAndRules\GameSettings.cs" />
     <Compile Include="GameAndRules\Player.cs" />
     <Compile Include="GameAndRules\PlayerConsole.cs" />
