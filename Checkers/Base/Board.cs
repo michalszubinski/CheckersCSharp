@@ -83,8 +83,8 @@ namespace Checkers.Base
                 if(move.enemyIds.Count > 1 || move.friendlyIds.Count > 1) return false;
                 else if(move.enemyIds.Count == 1 || move.friendlyIds.Count == 1)
                 {
-                    if(!move.moveAbility.canSingleScanTeammate && move.friendlyIds.Count == 1) return false;    
-                    if(!move.moveAbility.canSingleScanEnemy && move.enemyIds.Count == 1) return false;    
+                    if(!move.moveAbility.canScanSingleTeammate && move.friendlyIds.Count == 1) return false;    
+                    if(!move.moveAbility.canScanSingleEnemy && move.enemyIds.Count == 1) return false;    
                 }
             }
 
@@ -94,10 +94,10 @@ namespace Checkers.Base
                 if (move.friendlyIds.Count == 0 && move.moveAbility.haveToScanTeammates) return false;
             }
 
-            if(move.moveAbility.haveToSingleScanEnemy || move.moveAbility.haveToSingleScanTeammate)
+            if(move.moveAbility.haveToScanSingleEnemy || move.moveAbility.haveToScanSingleTeammate)
             {
-                if (move.moveAbility.haveToSingleScanEnemy && !(move.enemyIds.Count == 1)) return false;
-                if (move.moveAbility.haveToSingleScanTeammate && !(move.friendlyIds.Count == 1)) return false;
+                if (move.moveAbility.haveToScanSingleEnemy && !(move.enemyIds.Count == 1)) return false;
+                if (move.moveAbility.haveToScanSingleTeammate && !(move.friendlyIds.Count == 1)) return false;
             }
 
             if(move.moveAbility.canAttack || move.moveAbility.haveToAttack)

@@ -18,13 +18,13 @@ namespace Checkers.Base
         
         internal bool canScanEnemies;
         internal bool canScanTeammates;
-        internal bool canSingleScanEnemy;
-        internal bool canSingleScanTeammate;
+        internal bool canScanSingleEnemy;
+        internal bool canScanSingleTeammate;
 
         internal bool haveToScanEnemies;
         internal bool haveToScanTeammates;
-        internal bool haveToSingleScanEnemy;
-        internal bool haveToSingleScanTeammate;
+        internal bool haveToScanSingleEnemy;
+        internal bool haveToScanSingleTeammate;
 
         internal bool obligatoryIfPossible;
         internal bool obligatoryWhenCondition;

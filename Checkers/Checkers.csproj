@@ -52,6 +52,7 @@
     <Compile Include="GameAndRules\Game.cs" />
     <Compile Include="GameAndRules\GameRules.cs" />
     <Compile Include="GameAndRules\GameRulesBuilder.cs" />
+    <Compile Include="GameAndRules\GameRuleTests.cs" />
     <Compile Include="GameAndRules\GameSettings.cs" />
     <Compile Include="GameAndRules\Player.cs" />
     <Compile Include="GameAndRules\PlayerConsole.cs" />

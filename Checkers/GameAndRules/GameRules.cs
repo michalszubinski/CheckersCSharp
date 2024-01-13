@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// TODO: Inheriting GameRules ?
+
 namespace Checkers.GameAndRules
 {
     internal class GameRules
