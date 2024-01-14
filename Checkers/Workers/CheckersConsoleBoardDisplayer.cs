@@ -17,11 +17,11 @@ namespace Checkers.Workers
                 for (int row = board.x_LowerBoundary; row <= board.x_UpperBoundary; row++)
                 {
                     var tempPawn = board.getPawnAtCoordinates(new Coordinates(row, col));
-                    if(tempPawn == null) Console.Write("  ");
-                    else if(tempPawn.teamId == 0 && tempPawn.className == "queen") Console.Write("O "); // do check if is queen better way
-                    else if(tempPawn.teamId == 1 && tempPawn.className == "queen") Console.Write("X ");
-                    else if(tempPawn.teamId == 0) Console.Write("o ");
-                    else if(tempPawn.teamId == 1) Console.Write("x ");
+                    if(tempPawn == null) Console.Write("   ");
+                    else if(tempPawn.teamId == 0 && tempPawn.className == "queen") Console.Write("O  "); // do check if is queen better way
+                    else if(tempPawn.teamId == 1 && tempPawn.className == "queen") Console.Write("X  ");
+                    else if(tempPawn.teamId == 0) Console.Write("o  ");
+                    else if(tempPawn.teamId == 1) Console.Write("x  ");
                 }
                 Console.WriteLine();
             }
