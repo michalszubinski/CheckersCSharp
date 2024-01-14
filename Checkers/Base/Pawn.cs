@@ -25,5 +25,23 @@ namespace Checkers.Base
         internal bool specialAbilityOnReachingOtherEnd;
         internal bool specialAbilityReached;
         internal bool specialAbilityOnStart;
+
+        public Pawn()
+        {
+            this.pawnId = 0;
+            this.position = new Coordinates();
+            this.moveAbilities = new List<MoveAbility>();
+            this.className = String.Empty;
+            this.teamId = 0;
+            this.timesMoved = 0;
+            this.killCount = 0;
+            this.isDestroyable = true;
+            this.isAttacked = false;
+            this.isDefended = false;
+            this.shouldBeProtectedFromAttacks = false;
+            this.specialAbilityOnReachingOtherEnd = false;
+            this.specialAbilityReached = false;
+            this.specialAbilityOnStart = false;
+        }
     }
 }

@@ -41,8 +41,8 @@ namespace Checkers.GameAndRules
             _numberOfTeams = 2;
             _startingTeam = 0; 
 
-            //_pawns = new List<Pawn>;
-            //_players = new List<Player>;
+            _pawns = new List<Pawn>();
+            _players = new List<Player>();
 
             _x_boardLowerBoundary = 1;
             _y_boardLowerBoundary = 1;

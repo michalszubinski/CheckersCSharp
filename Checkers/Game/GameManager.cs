@@ -20,7 +20,7 @@ namespace Checkers.GameAndRules
         bool isTheMovePossible = false; // is the move possible
         Move requestedMove = new Move();
 
-        void startGame() // TODO
+        public void startGame() // TODO
         {
             setGameRules("default");
 
@@ -101,6 +101,8 @@ namespace Checkers.GameAndRules
             gameRules = GameRuleTests.getTestMap(); // REPLACE THIS
 
             //imported from gameRules
+            board = new Board(); // put this in a different place
+
             board.pawns = gameRules.pawns;
             this.players = gameRules.players;
 
