@@ -23,9 +23,11 @@ namespace Checkers.Workers
                     else if(tempPawn.teamId == 0) Console.Write("o ");
                     else if(tempPawn.teamId == 1) Console.Write("x ");
                 }
+                Console.WriteLine();
             }
 
             for (int row = 0; row <= board.x_UpperBoundary - board.x_LowerBoundary; row++) Console.Write($"  {(char)(row+97)}");
+            Console.WriteLine();
         }
     }
 }
