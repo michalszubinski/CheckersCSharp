@@ -60,9 +60,9 @@ namespace Checkers.GameAndRules
             moveAbility1.obligatoryWhenCondition = false;
             moveAbility1.obligatoryPreventingPlayerChange = false;
 
-            MoveAbility moveAbility2 = moveAbility1;
-            MoveAbility moveAbility3 = moveAbility1;
-            MoveAbility moveAbility4 = moveAbility1;
+            MoveAbility moveAbility2 = (MoveAbility)moveAbility1.Clone();
+            MoveAbility moveAbility3 = (MoveAbility)moveAbility1.Clone();
+            MoveAbility moveAbility4 = (MoveAbility)moveAbility1.Clone();
 
             moveAbility1.positionDifference = new Coordinates(1, 1);
             moveAbility2.positionDifference = new Coordinates(-1, 1);
@@ -74,7 +74,13 @@ namespace Checkers.GameAndRules
             pawn1.moveAbilities.Add(moveAbility3);
             pawn1.moveAbilities.Add(moveAbility4);
 
-            pawn2 = pawn1;
+            pawn1.position = new Coordinates(1, 1);
+
+            pawn2 = (Pawn)pawn1.Clone();
+
+            
+            pawn2.position.x = 8;
+            pawn2.position.y = 8;
 
             pawn1.teamId = 0;
             pawn2.teamId = 1;

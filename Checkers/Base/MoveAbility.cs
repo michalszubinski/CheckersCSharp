@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Checkers.Base
 {
-    internal struct MoveAbility
+    internal struct MoveAbility : ICloneable
     {
         internal Coordinates positionDifference;
         internal Coordinates attackedPositionDifference;
@@ -29,6 +29,11 @@ namespace Checkers.Base
         internal bool obligatoryIfPossible;
         internal bool obligatoryWhenCondition;
         internal bool obligatoryPreventingPlayerChange;
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
 
         // bool canLeaveBoard;
     }

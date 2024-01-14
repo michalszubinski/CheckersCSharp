@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Checkers.Base
 {
-    internal class Pawn
+    internal class Pawn : ICloneable
     {
         internal int pawnId;
         internal Coordinates position;
@@ -42,6 +42,11 @@ namespace Checkers.Base
             this.specialAbilityOnReachingOtherEnd = false;
             this.specialAbilityReached = false;
             this.specialAbilityOnStart = false;
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }
