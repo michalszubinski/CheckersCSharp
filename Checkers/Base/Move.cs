@@ -18,5 +18,17 @@ namespace Checkers.Base
         internal List<int> friendlyIds;
 
         internal bool obligatory;
+
+        public Move()
+        {
+            this.startingPosition = new Coordinates();
+            this.endingPosition = new Coordinates();
+            this.moveAbility = new MoveAbility();
+            this.allowed = false;
+            this.pawnId = 0;
+            this.enemyIds = new List<int>();
+            this.friendlyIds = new List<int>();
+            this.obligatory = false;
+        }
     }
 }
