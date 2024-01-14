@@ -207,7 +207,7 @@ namespace Checkers.Base
             return move;
         }
 
-        private Pawn getPawnAtCoordinates(Coordinates coordinates) // CAN THROW
+        internal Pawn getPawnAtCoordinates(Coordinates coordinates) // CAN THROW
         {
             foreach(var pawn in pawns)
             {

@@ -49,15 +49,16 @@
     <Compile Include="Base\MoveAbility.cs" />
     <Compile Include="Base\Pawn.cs" />
     <Compile Include="Data\Const.cs" />
-    <Compile Include="GameAndRules\Game.cs" />
-    <Compile Include="GameAndRules\GameRules.cs" />
-    <Compile Include="GameAndRules\GameRulesBuilder.cs" />
-    <Compile Include="GameAndRules\GameRuleTests.cs" />
-    <Compile Include="GameAndRules\GameSettings.cs" />
-    <Compile Include="GameAndRules\Player.cs" />
-    <Compile Include="GameAndRules\PlayerConsole.cs" />
+    <Compile Include="Game\GameManager.cs" />
+    <Compile Include="Game\GameRules.cs" />
+    <Compile Include="Game\GameRulesBuilder.cs" />
+    <Compile Include="Game\GameRuleTests.cs" />
+    <Compile Include="Game\GameSettings.cs" />
+    <Compile Include="Players\Player.cs" />
+    <Compile Include="Players\PlayerConsole.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Workers\CheckersConsoleBoardDisplayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

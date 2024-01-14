@@ -9,7 +9,7 @@ namespace Checkers.GameAndRules
 {
     internal class GameRuleTests
     {
-        GameRules getTestMap()
+        internal static GameRules getTestMap()
         {
             Pawn pawn1 = new Pawn();
             Pawn pawn2 = new Pawn();

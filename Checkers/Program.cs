@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Checkers.GameAndRules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 /*
  * Rethink namespace and folder structure
  * Rethink GameRules creating structure
+ * Rethink Pawn structure - maybe inheriting?
  * Add Builders for MoveAbility and Pawn?
  * Write board viewer in console
  * Improve encapsulation
@@ -26,6 +28,7 @@ namespace Checkers
     {
         static void Main(string[] args)
         {
+            GameManager game = new GameManager();
         }
     }
 }

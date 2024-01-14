@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Checkers.Base;
+using Checkers.Workers;
 
 namespace Checkers.GameAndRules
 {
-    internal class Game
+    internal class GameManager
     {
         internal int currentTurn_team;
         internal Board board;
@@ -28,6 +29,7 @@ namespace Checkers.GameAndRules
                 beforeMakeMove(); // clean-up, generates moves available to player
                 do // Turn loop
                 {
+                    CheckersConsoleBoardDisplayer.Display(board);
                     isTheMovePossible = makeMove();
 
                 } while (!isTheMovePossible);
@@ -94,9 +96,22 @@ namespace Checkers.GameAndRules
         {
             return board.generateAllMoves(teamId);
         }
-        void applyGameRules(GameRules gameRules)  // TODO
+        void applyGameRules(GameRules argGameRules)  // TODO
         {
-        }
+            gameRules = GameRuleTests.getTestMap(); // REPLACE THIS
+
+            //imported from gameRules
+            board.pawns = gameRules.pawns;
+            this.players = gameRules.players;
+
+            board.x_LowerBoundary = gameRules.x_boardLowerBoundary;
+            board.y_LowerBoundary = gameRules.y_boardLowerBoundary;
+            board.x_UpperBoundary = gameRules.x_boardUpperBoundary;
+            board.y_UpperBoundary = gameRules.y_boardUpperBoundary;
+
+            this.currentTurn_team = gameRules.startingTeam;
+            // gameRules.numberOfTeams;
+    }
         GameRules getGameRules(string ruleSet) // TODO
         {
             GameRules temp = new GameRules();  
