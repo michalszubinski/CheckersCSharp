@@ -58,8 +58,11 @@ namespace Checkers.Base
         {
             Coordinates temp = new Coordinates();
 
-            int.TryParse(match.Value[0].ToString(), out temp.x);
+            int.TryParse((match.Value[0] - 'a' + 1).ToString(), out temp.x); // idk about this +1; should be conditional, depending on the board borders
             int.TryParse(match.Value[1].ToString(), out temp.y);
+
+            //temp.x -= 97;
+
             return temp;
         }
 

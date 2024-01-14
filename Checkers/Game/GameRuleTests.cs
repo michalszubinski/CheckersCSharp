@@ -78,7 +78,9 @@ namespace Checkers.GameAndRules
 
             pawn2 = (Pawn)pawn1.Clone();
 
-            
+            pawn1.pawnId = 0;
+            pawn2.pawnId = 1;
+
             pawn2.position.x = 8;
             pawn2.position.y = 8;
 
