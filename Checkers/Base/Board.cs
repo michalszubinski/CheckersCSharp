@@ -195,8 +195,8 @@ namespace Checkers.Base
 
                     if (tempPawn == null) continue;
 
-                    if (pawn.teamId == tempPawn.teamId) move.friendlyIds.Add(tempPawn.teamId);
-                    else if (pawn.teamId != tempPawn.teamId) move.enemyIds.Add(tempPawn.teamId);
+                    if (pawn.teamId == tempPawn.teamId) move.friendlyIds.Add(tempPawn.pawnId);
+                    else if (pawn.teamId != tempPawn.teamId) move.enemyIds.Add(tempPawn.pawnId);
                 }
             }
             else
@@ -226,6 +226,32 @@ namespace Checkers.Base
             }
 
             return false;
+        }
+
+        internal void applyMove(Move move)
+        {
+            pawns[move.pawnId].position = move.endingPosition;
+
+
+            if(move.moveAbility.canAttack || move.moveAbility.haveToAttack && move.enemyIds.Count > 0)
+            {
+                IEnumerable<int> enumerableIdList = move.enemyIds;
+                foreach (var id in enumerableIdList.Reverse())
+                {
+                    pawns.Remove(pawns[id]);
+                }
+                updatePawnsIds();
+            }
+        }
+
+        private void updatePawnsIds()
+        {
+            int i = 0;
+            foreach(Pawn pawn in pawns)
+            {
+                pawn.pawnId = i;
+                i++;
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Checkers.GameAndRules
         //GAME
         List<Move> possibleMoves = new List<Move>(); // current moves available to active player
         bool isTheMovePossible = false; // is the move possible
-        Move requestedMove = new Move();
+        Move attemptedMove = new Move();
 
         public void startGame() // TODO
         {
@@ -51,9 +51,9 @@ namespace Checkers.GameAndRules
 
         bool makeMove()
         {
-            Move attemptedMove = players[currentTurn_team].getMove();
+            attemptedMove = players[currentTurn_team].getMove();
 
-            foreach( var move in possibleMoves )
+            foreach (var move in possibleMoves)
             {
                 if (attemptedMove.startingPosition == move.startingPosition && attemptedMove.endingPosition == move.endingPosition)
                     return true;
@@ -83,7 +83,7 @@ namespace Checkers.GameAndRules
 
         void applyMove()
         {
-            throw new NotImplementedException();
+            board.applyMove(attemptedMove);
         }
 
         void afterTurnClearUp()
