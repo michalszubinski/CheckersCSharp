@@ -83,7 +83,7 @@ namespace Checkers.Base
                 if(move.enemyIds.Count > 1 || move.friendlyIds.Count > 1) return false;
                 else if(move.enemyIds.Count == 1 || move.friendlyIds.Count == 1)
                 {
-                    if(!move.moveAbility.canScanSingleTeammate && move.friendlyIds.Count == 1) return false;    
+                    if (!move.moveAbility.canScanSingleTeammate && move.friendlyIds.Count == 1) return false;    
                     if(!move.moveAbility.canScanSingleEnemy && move.enemyIds.Count == 1) return false;    
                 }
             }
@@ -186,7 +186,7 @@ namespace Checkers.Base
         { 
             if(Math.Abs(move.moveAbility.positionDifference.x) == Math.Abs(move.moveAbility.positionDifference.y))
             {
-                for(int i = 0; i < Math.Abs(move.moveAbility.positionDifference.x); ++i)
+                for(int i = 1; i < Math.Abs(move.moveAbility.positionDifference.x); ++i)
                 {
                     // CLEAN THIS LATER
                     Pawn tempPawn = getPawnAtCoordinates(new Coordinates(
