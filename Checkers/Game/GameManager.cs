@@ -53,9 +53,15 @@ namespace Checkers.GameAndRules
         {
             attemptedMove = players[currentTurn_team].getMove();
 
+            Pawn tempPawn = board.getPawnAtCoordinates(attemptedMove.startingPosition);
+            if (tempPawn == null) return false;
+
+            attemptedMove.pawnId = tempPawn.pawnId;
+
             foreach (var move in possibleMoves)
             {
-                if (attemptedMove.startingPosition == move.startingPosition && attemptedMove.endingPosition == move.endingPosition)
+                if (attemptedMove.startingPosition == move.startingPosition && attemptedMove.endingPosition == move.endingPosition
+                    && attemptedMove.pawnId == move.pawnId)
                     return true;
             }
 

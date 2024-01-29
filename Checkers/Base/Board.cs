@@ -176,6 +176,7 @@ namespace Checkers.Base
             move.startingPosition = pawn.position;
             move.endingPosition = pawn.position + moveAbility.positionDifference;
             move.moveAbility = moveAbility;
+            move.pawnId = pawn.pawnId;
 
             move = scanForPawns(move,pawn);
 

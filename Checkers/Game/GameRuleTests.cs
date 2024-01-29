@@ -19,6 +19,8 @@ namespace Checkers.GameAndRules
             Player player0 = new PlayerConsole();
             Player player1 = new PlayerConsole();
 
+            player1.teamId = 1;
+
             //internal Coordinates positionDifference;
             //internal Coordinates attackedPositionDifference;
 
