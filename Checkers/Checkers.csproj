@@ -47,12 +47,14 @@
     <Compile Include="Base\Coordinates.cs" />
     <Compile Include="Base\Move.cs" />
     <Compile Include="Base\MoveAbility.cs" />
+    <Compile Include="Base\MoveAbilityBuilder.cs" />
     <Compile Include="Base\Pawn.cs" />
+    <Compile Include="Base\PawnBuilder.cs" />
     <Compile Include="Data\Const.cs" />
     <Compile Include="Game\GameManager.cs" />
-    <Compile Include="Game\GameRules.cs" />
-    <Compile Include="Game\GameRulesBuilder.cs" />
-    <Compile Include="Game\GameRuleTests.cs" />
+    <Compile Include="Game\Rules\GameRules.cs" />
+    <Compile Include="Game\Rules\GameRulesBuilder.cs" />
+    <Compile Include="Game\Rules\GameRuleTests.cs" />
     <Compile Include="Game\GameSettings.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Players\PlayerConsole.cs" />
