@@ -146,33 +146,111 @@ namespace Checkers.Base
         }
 
         // SPECIFIC CASES
-        public PawnBuilder WithDefaultsOfPawnCheckers()
+        public PawnBuilder WithDefaultsOfPawnCheckers(int teamId)
         {
-            /*
-            _moveAbilities.Clear();
+            this._teamId = teamId;
 
-            MoveAbility moveAbilityForwardLeft = new MoveAbility();
-            MoveAbility moveAbilityForwardRight = new MoveAbility();
-            
-            if (this._teamId == 0)
+            // CREATING AND ADDING MOVEABILITIES
+            int movementDirectionCoefficient = 1;
+            if( teamId == 1)
             {
-                moveAbilityForwardLeft.positionDifference = new Coordinates(-1, 1);
-                moveAbilityForwardRight.positionDifference = new Coordinates(1, 1);
+                movementDirectionCoefficient = -1;
             }
-            else
-            {
-                moveAbilityForwardLeft.positionDifference = new Coordinates(-1, -1);
-                moveAbilityForwardRight.positionDifference = new Coordinates(1, -1);
-            }
-            */
-            //TODO: INSERT MOVES HERE
+
+            // BASIC MOVES
+            MoveAbility moveAbilityLeft = new MoveAbilityBuilder()
+                .WithPositionDifference(new Coordinates(-1, 1 * movementDirectionCoefficient))
+                .Build();
+
+            MoveAbility moveAbilityRight = new MoveAbilityBuilder()
+                .WithPositionDifference(new Coordinates(1, 1*movementDirectionCoefficient))
+                .Build();
+
+            // ATTACKING MOVES
+            MoveAbility moveAbilityAttackLeftUp = new MoveAbilityBuilder()
+                .WithPositionDifference(new Coordinates(-2, 2))
+                .WithCanAttack(true)
+                .WithHaveToAttack(true)
+                .WithObligatoryPreventingPlayerChange(true)
+                .WithAttackedPositionDifference(new Coordinates(-1, 1))
+                .Build();
+
+            MoveAbility moveAbilityAttackRightUp = new MoveAbilityBuilder()
+                .WithPositionDifference(new Coordinates(2, 2))
+                .WithCanAttack(true)
+                .WithHaveToAttack(true)
+                .WithObligatoryPreventingPlayerChange(true)
+                .WithAttackedPositionDifference(new Coordinates(1, 1))
+                .Build();
+
+            MoveAbility moveAbilityAttackLeftDown = new MoveAbilityBuilder()
+                .WithPositionDifference(new Coordinates(-2, -2))
+                .WithCanAttack(true)
+                .WithHaveToAttack(true)
+                .WithObligatoryPreventingPlayerChange(true)
+                .WithAttackedPositionDifference(new Coordinates(-1, -1))
+                .Build();
+
+            MoveAbility moveAbilityAttackRightDown = new MoveAbilityBuilder()
+                .WithPositionDifference(new Coordinates(2, -2))
+                .WithCanAttack(true)
+                .WithHaveToAttack(true)
+                .WithObligatoryPreventingPlayerChange(true)
+                .WithAttackedPositionDifference(new Coordinates(1, -1))
+                .Build();
+
+            // ADDING MOVES TO THE MOVE ABILITY LIST
+            _moveAbilities.Add(moveAbilityLeft);
+            _moveAbilities.Add(moveAbilityRight);
+            _moveAbilities.Add(moveAbilityAttackLeftUp);
+            _moveAbilities.Add(moveAbilityAttackRightUp);
+            _moveAbilities.Add(moveAbilityAttackRightDown);
+            _moveAbilities.Add(moveAbilityAttackRightUp);
+
             this._className = "pawn";
             return this;
         }
 
-        public PawnBuilder WithDefaultsOfQueenCheckers()
+        public PawnBuilder WithDefaultsOfQueenCheckers(int teamId, int maxBoardDimension)
         {
+            this._teamId = teamId;
             //TODO: INSERT MOVES HERE
+
+            // BASIC MOVES
+            for(int i = 1; i <= maxBoardDimension; i++) // RANGE
+            {
+                for(int j = 1; j > -3; j-=2)            // RIGHT OR LEFT
+                {
+                    for (int k = 1; k > -3; k -= 2)    // UP OR DOWN
+                    {
+                        MoveAbility moveAbilityBasic = new MoveAbilityBuilder()
+                            .WithPositionDifference(new Coordinates(i*j,i*k))
+                            .Build();
+
+                        _moveAbilities.Add(moveAbilityBasic); // ADDING MOVES TO THE MOVE ABILITY LIST
+                    }
+                }
+            }
+
+            // ATTACKING MOVES
+            for (int i = 1; i <= maxBoardDimension; i++) // RANGE
+            {
+                for (int j = 1; j > -3; j -= 2)            // RIGHT OR LEFT
+                {
+                    for (int k = 1; k > -3; k -= 2)    // UP OR DOWN
+                    {
+                        MoveAbility moveAbilityBasic = new MoveAbilityBuilder()
+                            .WithPositionDifference(new Coordinates(i * j, i * k))
+                            .WithCanScanEnemies(true)
+                            .WithAttackedPositionDifference(new Coordinates(i * j - 1*j, i * k - 1*k)) // add check in method that checks the viability of the move if the pawn is here
+                            .Build();
+
+                        _moveAbilities.Add(moveAbilityBasic); // ADDING MOVES TO THE MOVE ABILITY LIST
+                    }
+                }
+            }
+
+
             this._className = "queen";
             return this;
         }
